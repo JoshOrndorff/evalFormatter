@@ -10,7 +10,9 @@ Basics
 ------
 
 To create a CTYEvaluation object call:
+
 `myEval = CTYEvaluation(fname, lname, cname, date, course, instructor, site, ta, completion)`
+
 The arguments, all of which are required are:
  * Student's legal first name
  * Student's legal last name
@@ -23,28 +25,37 @@ The arguments, all of which are required are:
  * On of these phrases: "successfully completing", "completing", "participating in".
  
 Then to save the file with the standard naming format, call:
+
 `myEval.save()`
+
 An optional suffix can be supplied as a string and will be appended to the CTY default name.
 
 Signature Line
 --------------
 Adding the standard instructor's signature line is accomplished with:
+
 `myEval.add_signature()`
 
 Paragraphs
 ----------
 
 While this module makes no attempt to autmoate the actual writing process, it does provide and API for those who may want to do so in some way. In order to add a body paragraph (or even just the paragraph header) to your eval, call:
+
 `myEval.add_paragraph("Content Proficiency")`
+
 or
+
 `myEval.add_paragraph("Content Proficiency", "You did very well understanding the content...")`
 
 Notes
 -----
 
 You can also add a TAs notes about a student to the eval in a bulleted list format for easier reference while writing.
-```notes = ['good at soldering', 'too talkative', 'likes transistors']
-myEval.add_notes(notes)```
+
+```
+notes = ['good at soldering', 'too talkative', 'likes transistors']
+myEval.add_notes(notes)
+```
 
 This function supports but native python lists, and a custom xml-based format that I may document if anyone asks for it.
 
