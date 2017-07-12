@@ -6,8 +6,8 @@ This module simplifies the monotonous portions of writing a CTY evaluation by he
 Usage
 =====
 
-Basics
-------
+Document Creation
+-----------------
 
 To create a CTYEvaluation object call:
 
@@ -23,12 +23,25 @@ The arguments, all of which are required are:
  * Full site name (Hint: Any string will do, but CTY requires the format "Carlisle, PA".)
  * TA's full name
  * On of these phrases: "successfully completing", "completing", "participating in".
- 
-Then to save the file with the standard naming format, call:
 
+Saving
+------
+
+Then to save the file with the standard naming format, call:
 `myEval.save()`
 
 An optional suffix can be supplied as a string and will be appended to the CTY default name.
+`myEval.save(suffix="firstDraft")`
+
+To help prevent accidentally overwriting evals that have already been human-edited, the `file_exists` function detects whether the specified file exists. For example:
+```
+if myEval.file_exists():
+  # print a warning message
+else:
+  myEval.save()
+```
+
+If you use suffixes, be sure to match with your call to save.
 
 Signature Line
 --------------
@@ -47,8 +60,8 @@ or
 
 `myEval.add_paragraph("Content Proficiency", "You did very well understanding the content...")`
 
-Notes
------
+TA Notes
+--------
 
 You can also add a TAs notes about a student to the eval in a bulleted list format for easier reference while writing.
 
@@ -57,12 +70,17 @@ notes = ['good at soldering', 'too talkative', 'likes transistors']
 myEval.add_notes(notes)
 ```
 
-This function supports but native python lists, and a custom xml-based format that I may document if anyone asks for it.
+This function supports both native python lists, and a custom xml-based format that I may document if anyone asks for it.
+
 
 
 Dependancies
 ============
-CTY requires evaluations to be submitted in Microsoft Open XML format and to that end, this module depends on the excellent python-docx module: https://github.com/python-openxml/python-docx
+CTY requires evaluations to be submitted in Microsoft Open XML format and to that end, this module depends on the excellent python-docx module: https://github.com/python-openxml/python-docx . It can be installed (at least on Debian) with: `pip install python-docx`.
+
+Python Version
+==============
+This module targets python 3x. Conversion to support python 2x is likely trivial, but I have no interest in it. Feel free to fork per the license below, but I will not accept pull requests for 2x compatibility.
 
 License
 =======

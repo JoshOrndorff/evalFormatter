@@ -8,7 +8,7 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 # Imports to load the template file
-from os.path import dirname
+from os.path import dirname, isfile
 from os import sep
 
 class CTYEvaluation(object):
@@ -20,9 +20,12 @@ class CTYEvaluation(object):
   def __init__(self, fname, lname, cname, date, course, instructor, site, ta, completion):
     
     # Validate required arguments (note cname is not required (can be None))
+    x = 0
     for arg in [fname, lname, date, course, instructor, site, ta, completion]:
+      x+=1
       if arg is None:
-        raise ValueError("Required argument was None.")
+        print(x)
+        raise ValueError("Required argument: {} was None.".format(arg))
     
     # Reference only the arguments that will be used outside of the constructor
     self.fname = fname
@@ -94,8 +97,9 @@ class CTYEvaluation(object):
     
   def add_notes(self, notes):
     '''
-    Add a bulleted list of notes to facilitate human editing.
-    Notes can be either a plain python list or an xml Element Tree.'''
+      Add a bulleted list of notes to facilitate human editing.
+      Notes can be either a plain python list or an xml Element Tree.
+    '''
     
     xmlStructure = type(notes) is not list
     
@@ -109,12 +113,22 @@ class CTYEvaluation(object):
     signature = self.document.add_paragraph("Instructor's Signature: ")
     signature.add_run('_' * 60)
 
-  def save(self, suffix = None):
-    ''' Saves document to  CTY standard filename, last_first.docx, and appends
-    an optional suffix.'''
+  def save(self, suffix = ""):
+    '''
+      Saves document to  CTY standard filename, last_first.docx, and appends
+      an optional suffix.
+    '''
         
     filename = self.lname + '_' + self.fname + suffix + '.docx'
       
     self.document.save(filename)
+  
+  def file_exists(self, suffix = ""):
+    '''
+      Returns boolean whether a file with the CTY standard filename,
+      last_first.docx (with optional suffix esits in the pwd.
+    '''
+    return isfile(self.lname + '_' + self.fname + suffix + ".docx")
+    
     
 

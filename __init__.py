@@ -1,1 +1,1 @@
-from evalFormatter import CTYEvaluation
+from .evalFormatter import CTYEvaluation
