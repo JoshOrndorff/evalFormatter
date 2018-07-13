@@ -61,6 +61,7 @@ class CTYEvaluation(object):
     heading.add_run("Teaching Assistant: " + ta)
 
     #TODO I guess there is better API support for tab stops in python-docx now
+    # https://python-docx.readthedocs.io/en/latest/dev/analysis/features/text/tab-stops.html
     # Insert a tab stop in the middle of the page for proper heading format.
     # Simplified code from: github.com/python-openxml/python-docx/issues/206
     pTabs = OxmlElement('w:tabs')
