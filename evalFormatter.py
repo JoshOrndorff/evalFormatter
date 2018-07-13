@@ -52,7 +52,8 @@ class CTYEvaluation(object):
     # Populate heading information including names, date, site, and course
     heading = self.document.add_paragraph()
     heading.paragraph_format.space_after = Pt(11)
-    heading.add_run("Student: " + fname + ' ' + lname + '\t')  
+    heading.paragraph_format.line_spacing = 1
+    heading.add_run("Student: " + fname + ' ' + lname + '\t')
     heading.add_run("Date: " + date + '\n')
     heading.add_run("Course: " + course + '\t')
     heading.add_run("Instructor: " + instructor + '\n')
@@ -77,6 +78,7 @@ class CTYEvaluation(object):
     intro = self.document.add_paragraph(introText)
     intro.paragraph_format.space_after = Pt(11)
     
+    intro.paragraph_format.line_spacing = 1
     # Keep track of the number of body paragraphs in the document
     self.numParagraphs = 0
     
@@ -89,6 +91,7 @@ class CTYEvaluation(object):
                      + " contains five.")
     
     paragraph = self.document.add_paragraph()
+    paragraph.paragraph_format.line_spacing = 1
     paragraph.paragraph_format.space_after = Pt(11)
     paragraph.add_run(title + '\n').bold = True
     paragraph.add_run(text)
